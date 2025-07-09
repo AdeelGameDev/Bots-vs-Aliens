@@ -1,10 +1,9 @@
-**🌻 Plants vs. Zombies 3D (Unity Project)**
+**🌻 PVZ-3D-Clone (Unity Project)**
 Recreated one of my favorite classic games, Plants vs. Zombies by PopCap Games — this time in 3D using Unity!
 
 It was a fun project where I built the core gameplay from scratch, focusing on capturing the original game's feel with a simple 3D style.
 
 🎮 Gameplay Preview
-![0413(4)-Cover](https://github.com/user-attachments/assets/238ff2ba-8463-4fa0-9d7a-e04ae162fae9)
 ![0413(2)-Cover](https://github.com/user-attachments/assets/f7ddc10a-b35a-4b69-914e-273dd36ab9bd)
 
 
@@ -35,3 +34,7 @@ Made with: Unity
 💬 Feedback
 I'm actively improving the project!
 Feel free to share your feedback — it really helps.
+
+## 📜 License
+
+Licensed under the [MIT License](LICENSE).
