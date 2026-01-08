@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01c670cabfa46d48886840813144603, type: 3}
   m_Name: PeaShooterSeedSO
   m_EditorClassIdentifier: 
+  seedID: PeaShooter
   plant: {fileID: -4078799545019640302, guid: 8ccc17ed0a9b1c64d9f7ebfe824386d0, type: 3}
   seedCost: 100
   seedPlantName: PeaShooter

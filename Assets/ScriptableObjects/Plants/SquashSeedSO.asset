@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01c670cabfa46d48886840813144603, type: 3}
   m_Name: SquashSeedSO
   m_EditorClassIdentifier: 
+  seedID: Squash
   plant: {fileID: 424896351654223575, guid: 4b79e4cff367a4446b9cc8d805aa492d, type: 3}
   seedCost: 50
   seedPlantName: Squash

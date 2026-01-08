@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -18945,8 +18946,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingSeedSO: {fileID: 11400000, guid: 761c8086bac33a3448e4a1cb5d4c5dab, type: 2}
-  unlockedSeeds:
-    unlockedSeeds: []
+  allSeeds:
+  - {fileID: 11400000, guid: 761c8086bac33a3448e4a1cb5d4c5dab, type: 2}
+  - {fileID: 11400000, guid: b99ab204edb8ac246b214549fcd0bcbe, type: 2}
+  - {fileID: 11400000, guid: 098a10c04e2f12347ae1a95615b54003, type: 2}
+  - {fileID: 11400000, guid: 43ca2595e529cde42a8c3cda3bcefdac, type: 2}
+  - {fileID: 11400000, guid: 1ab7cb19e9eafdb43b9f05b8c4495a35, type: 2}
 --- !u!1001 &1791395861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19777,6 +19782,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &1838231003
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01c670cabfa46d48886840813144603, type: 3}
   m_Name: SunFlowerSeedSO
   m_EditorClassIdentifier: 
+  seedID: SunFlower
   plant: {fileID: 4429385958302069533, guid: 35bfea28a0adb5c4db69fd981ac30063, type: 3}
   seedCost: 50
   seedPlantName: SunFlower

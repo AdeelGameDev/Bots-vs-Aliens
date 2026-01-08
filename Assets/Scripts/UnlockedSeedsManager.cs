@@ -2,19 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class UnlockedSeeds
+public class UnlockedSeedsData
 {
-    public List<SeedSO> unlockedSeeds = new List<SeedSO>();
+    public List<string> unlockedSeedIDs = new List<string>();
 }
-
-
 public class UnlockedSeedsManager : MonoBehaviour
 {
     private const string UNLOCKED_SEED_KEY = "UnlockedSeeds";
 
     [SerializeField] private SeedSO startingSeedSO;
+    [SerializeField] private List<SeedSO> allSeeds; // assign all seed assets in Inspector
 
-    public UnlockedSeeds unlockedSeeds = new UnlockedSeeds();
+    private UnlockedSeedsData unlockedSeedsData = new UnlockedSeedsData();
 
     private void Awake()
     {
@@ -23,17 +22,17 @@ public class UnlockedSeedsManager : MonoBehaviour
 
     public void UnlockNewSeed(SeedSO seedSO)
     {
-        if (!unlockedSeeds.unlockedSeeds.Contains(seedSO))
+        if (!unlockedSeedsData.unlockedSeedIDs.Contains(seedSO.seedID))
         {
-            unlockedSeeds.unlockedSeeds.Add(seedSO);
+            unlockedSeedsData.unlockedSeedIDs.Add(seedSO.seedID);
             SaveUnlockedSeeds();
-            Debug.Log($"Unlocked new seed: {seedSO.name}");
+            Debug.Log($"Unlocked new seed: {seedSO.seedPlantName}");
         }
     }
 
     private void SaveUnlockedSeeds()
     {
-        string json = JsonUtility.ToJson(unlockedSeeds);
+        string json = JsonUtility.ToJson(unlockedSeedsData);
         PlayerPrefs.SetString(UNLOCKED_SEED_KEY, json);
         PlayerPrefs.Save();
         Debug.Log($"Unlocked seeds saved: {json}");
@@ -44,19 +43,27 @@ public class UnlockedSeedsManager : MonoBehaviour
         if (PlayerPrefs.HasKey(UNLOCKED_SEED_KEY))
         {
             string json = PlayerPrefs.GetString(UNLOCKED_SEED_KEY);
-            unlockedSeeds = JsonUtility.FromJson<UnlockedSeeds>(json);
+            unlockedSeedsData = JsonUtility.FromJson<UnlockedSeedsData>(json);
             Debug.Log($"Loaded unlocked seeds: {json}");
         }
         else
         {
-            // Start with the initial seed if no unlocked seeds are saved
-            unlockedSeeds.unlockedSeeds.Add(startingSeedSO);
+            unlockedSeedsData.unlockedSeedIDs.Add(startingSeedSO.seedID);
             SaveUnlockedSeeds();
         }
     }
 
     public List<SeedSO> GetUnlockedSeeds()
     {
-        return unlockedSeeds.unlockedSeeds;
+        List<SeedSO> unlocked = new List<SeedSO>();
+        foreach (string id in unlockedSeedsData.unlockedSeedIDs)
+        {
+            SeedSO seed = allSeeds.Find(s => s.seedID == id);
+            if (seed != null)
+                unlocked.Add(seed);
+            else
+                Debug.LogError($"No SeedSO found for id: {id}");
+        }
+        return unlocked;
     }
 }
