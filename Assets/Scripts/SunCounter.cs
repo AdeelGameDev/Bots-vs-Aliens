@@ -29,7 +29,7 @@ public class SunCounter : MonoBehaviour
         {
             ReduceSunCount(obj.seedCost);
             OnSeedPurchased?.Invoke(obj, grassPatch);
-            OnSunCountUpdated(sunCount);
+            OnSunCountUpdated?.Invoke(sunCount);
         }
 
     }
