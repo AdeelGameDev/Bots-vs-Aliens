@@ -1,27 +1,30 @@
-PVZ-3D-Clone (Unity Project)
-A 3D recreation of one of my favorite classic games, Plants vs. Zombies by PopCap Games, built in Unity. This project focuses on capturing the core gameplay and feel of the original game with a simple 3D style.
+Bots vs Aliens (Unity Project)
+
+A 3D tower-defense game inspired by the classic Plants vs Zombies, reimagined with a robot vs alien theme. Built in Unity, this project focuses on capturing the core gameplay loop while introducing a futuristic aesthetic, modular units, and energy-based mechanics.
 
 Gameplay Preview
-![0413(2)-Cover](https://github.com/user-attachments/assets/f7ddc10a-b35a-4b69-914e-273dd36ab9bd)
+
 
 Features
-• Core planting and defending mechanics
-• Simple 3D environment replicating the lawn
-• Wave-based zombie spawning
-• Gameplay inspired by the original
+• Core planting and defending mechanics, reimagined as bots vs aliens
+• Photon resource system (replaces sun)
+• Modular 3D environment with sci-fi styling
+• Wave-based alien spawning
+• Gameplay inspired by the original, but with a unique robotic twist
 
 Purpose
 • Practice Unity 3D development
-• Recreate a nostalgic game from scratch
+• Build a unique tower-defense game from scratch
 • Improve skills in game logic, UI, and scene setup
+• Explore original branding and mechanics beyond PvZ
 
 Download & Play
-Play the game here: https://adeelgamedev.itch.io/plants-vs-zombies
+Play the game here: https://adeelgamedev.itch.io/bots-vs-aliens (adeelgamedev.itch.io in Bing)
 
 Credits
-• Original Game: Plants vs. Zombies by PopCap Games
-• Made with: Unity
+• Concept inspired by Plants vs Zombies by PopCap Games
+• Original assets, models, and UI created for Bots vs Aliens
+• Made with Unity
 
 License
-
 Licensed under the [MIT License](LICENSE).
