@@ -6,18 +6,29 @@ public class UnlockedSeedsData
 {
     public List<string> unlockedSeedIDs = new List<string>();
 }
+
 public class UnlockedSeedsManager : MonoBehaviour
 {
     private const string UNLOCKED_SEED_KEY = "UnlockedSeeds";
 
+    [Header("Setup")]
     [SerializeField] private SeedSO startingSeedSO;
-    [SerializeField] private List<SeedSO> allSeeds; // assign all seed assets in Inspector
+    [SerializeField] private List<SeedSO> allSeeds;
+
+    [Header("Debug")]
+    [SerializeField] private bool unlockAllSeedsForTesting = false;
 
     private UnlockedSeedsData unlockedSeedsData = new UnlockedSeedsData();
 
     private void Awake()
     {
         LoadUnlockedSeeds();
+
+        // Debug mode: unlock everything
+        if (unlockAllSeedsForTesting)
+        {
+            UnlockAllSeeds();
+        }
     }
 
     public void UnlockNewSeed(SeedSO seedSO)
@@ -28,6 +39,22 @@ public class UnlockedSeedsManager : MonoBehaviour
             SaveUnlockedSeeds();
             Debug.Log($"Unlocked new seed: {seedSO.seedPlantName}");
         }
+    }
+
+    private void UnlockAllSeeds()
+    {
+        unlockedSeedsData.unlockedSeedIDs.Clear();
+
+        foreach (var seed in allSeeds)
+        {
+            if (!unlockedSeedsData.unlockedSeedIDs.Contains(seed.seedID))
+            {
+                unlockedSeedsData.unlockedSeedIDs.Add(seed.seedID);
+            }
+        }
+
+        SaveUnlockedSeeds();
+        Debug.Log("All seeds unlocked (TEST MODE)");
     }
 
     private void SaveUnlockedSeeds()
@@ -56,14 +83,26 @@ public class UnlockedSeedsManager : MonoBehaviour
     public List<SeedSO> GetUnlockedSeeds()
     {
         List<SeedSO> unlocked = new List<SeedSO>();
+
         foreach (string id in unlockedSeedsData.unlockedSeedIDs)
         {
             SeedSO seed = allSeeds.Find(s => s.seedID == id);
+
             if (seed != null)
                 unlocked.Add(seed);
             else
                 Debug.LogError($"No SeedSO found for id: {id}");
         }
+
         return unlocked;
+    }
+
+    // Optional helper for testing reset
+    public void ResetProgress()
+    {
+        PlayerPrefs.DeleteKey(UNLOCKED_SEED_KEY);
+        unlockedSeedsData = new UnlockedSeedsData();
+        LoadUnlockedSeeds();
+        Debug.Log("Progress reset");
     }
 }

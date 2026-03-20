@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01c670cabfa46d48886840813144603, type: 3}
   m_Name: PotatoMineSeedSO
   m_EditorClassIdentifier: 
-  seedID: PotatoMine
+  seedID: SpikeMine
   plant: {fileID: 6053145040911684343, guid: a77643c0e35f8d44598b7fe7cb1eec18, type: 3}
   seedCost: 25
-  seedPlantName: PotatoMine
+  seedPlantName: SpikeMine
   seedRechargeTime: 10
   seedIconImage: {fileID: 0}

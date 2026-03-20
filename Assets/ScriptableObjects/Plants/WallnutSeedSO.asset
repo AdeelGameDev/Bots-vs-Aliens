@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01c670cabfa46d48886840813144603, type: 3}
   m_Name: WallnutSeedSO
   m_EditorClassIdentifier: 
-  seedID: Wallnut
+  seedID: ShieldCore
   plant: {fileID: -245214877843655344, guid: 184b4614b91d3da4f9f04fea8c22d942, type: 3}
   seedCost: 50
-  seedPlantName: Wallnut
+  seedPlantName: ShieldCore
   seedRechargeTime: 7.5
   seedIconImage: {fileID: 0}

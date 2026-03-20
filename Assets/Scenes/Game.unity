@@ -18952,6 +18952,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 098a10c04e2f12347ae1a95615b54003, type: 2}
   - {fileID: 11400000, guid: 43ca2595e529cde42a8c3cda3bcefdac, type: 2}
   - {fileID: 11400000, guid: 1ab7cb19e9eafdb43b9f05b8c4495a35, type: 2}
+  unlockAllSeedsForTesting: 1
 --- !u!1001 &1791395861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20003,7 +20004,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sunCount: 0
-  startingSunCount: 150
+  startingSunCount: 1000
 --- !u!4 &1865897268
 Transform:
   m_ObjectHideFlags: 0
