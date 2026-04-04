@@ -1,14 +1,21 @@
 public class WallNut : Plant
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private ShieldCoreAnimator animator;
+    private CodeMonkey.HealthSystemCM.HealthSystem healthSystem;
+
     protected override void Start()
     {
         base.Start();
+        animator = GetComponent<ShieldCoreAnimator>();
+        healthSystem = GetComponent<CodeMonkey.HealthSystemCM.HealthSystemComponent>().GetHealthSystem();
+
+        // Subscribe to damage event
+        healthSystem.OnDamaged += HealthSystem_OnDamaged;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HealthSystem_OnDamaged(object sender, System.EventArgs e)
     {
-
+        if (animator != null)
+            animator.PlayDamage();
     }
 }
