@@ -254,6 +254,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2911539881892846307, guid: abaf91751c3c3f9419916a51a262f331, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8197730847207184455}
+    - targetCorrespondingSourceObject: {fileID: 2911539881892846307, guid: abaf91751c3c3f9419916a51a262f331, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6109825250286036331}
   m_SourcePrefab: {fileID: 100100000, guid: abaf91751c3c3f9419916a51a262f331, type: 3}
 --- !u!4 &978984876605085952 stripped
 Transform:
@@ -284,7 +287,6 @@ MonoBehaviour:
     m_Bits: 512
   rayCastPoint: {fileID: 2638855420209387011}
   distance: 3
-  animator: {fileID: -8197730847207184455}
 --- !u!95 &-8197730847207184455
 Animator:
   serializedVersion: 7
@@ -293,7 +295,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5978610864536109588}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: d31fd43af89ec414d946b2c2a61d9e68, type: 2}
   m_CullingMode: 0
@@ -307,6 +309,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6109825250286036331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5978610864536109588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf8aed248822b4429e197e184e7dab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crushPodModel: {fileID: 4652681213009272792}
+  idleSquashScale: 0.9
+  idleDuration: 1
+  jumpHeight: 1
+  jumpDuration: 0.4
+  slamDuration: 0.2
+  impactSquash: 0.7
 --- !u!4 &6995454119750641336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1984764217939197519, guid: abaf91751c3c3f9419916a51a262f331, type: 3}
