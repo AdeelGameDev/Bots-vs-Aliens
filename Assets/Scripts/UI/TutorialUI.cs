@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -40,7 +40,7 @@ public class TutorialUI : MonoBehaviour
 
     private TutorialStep currentStep;
 
-    private async void Start()
+    private void Start()
     {
         interactivityBlocker.SetActive(false);
 
@@ -58,7 +58,12 @@ public class TutorialUI : MonoBehaviour
         GrassPatch.OnPlantPlaced += HandlePlantPlaced;
         SunCounter.OnSunCountUpdated += SunCounter_OnSunCountUpdated;
 
-        await Task.Delay(100);
+        StartCoroutine(InitialDeactivate());
+    }
+
+    private IEnumerator InitialDeactivate()
+    {
+        yield return new WaitForSeconds(0.1f);
         OnSunSpawnerDeactivate?.Invoke();
         OnZombieSpawnerDeactivate?.Invoke();
     }
@@ -119,7 +124,7 @@ public class TutorialUI : MonoBehaviour
         }
     }
 
-    private async void UpdateTutorialStep(TutorialStep step)
+    private void UpdateTutorialStep(TutorialStep step)
     {
         currentStep = step;
 
@@ -129,41 +134,58 @@ public class TutorialUI : MonoBehaviour
                 infoText.text = TAP_ON_SEED_PACKET;
                 arrow.SetActive(true);
                 break;
+
             case TutorialStep.PlantOnGrass:
                 infoText.text = PLANT_ON_GRASS;
-                OnTutorialIndicatorActivate.Invoke();
+                OnTutorialIndicatorActivate?.Invoke();
                 arrow.SetActive(false);
                 break;
+
             case TutorialStep.NicelyDone:
-                infoText.text = NICELY_DONE;
-                arrow.SetActive(false);
-                await Task.Delay(2000);
-                UpdateTutorialStep(TutorialStep.EnableSunSpawner);
+                StartCoroutine(NicelyDoneCoroutine());
                 break;
+
             case TutorialStep.EnableSunSpawner:
                 OnSunSpawnerActivate?.Invoke();
                 infoText.text = TAP_ON_THE_FALLING_SUN;
                 break;
+
             case TutorialStep.KeepCollecting:
                 infoText.text = KEEP_ON_COLLECTING;
                 break;
+
             case TutorialStep.YouCollectedEnough:
-                interactivityBlocker.SetActive(true);
-                infoText.text = EXCELLENT_YOU_COLLECTED_ENOUGH;
-                await Task.Delay(2000);
-                UpdateTutorialStep(TutorialStep.PlantAgain);
+                StartCoroutine(CollectedEnoughCoroutine());
                 break;
+
             case TutorialStep.PlantAgain:
                 interactivityBlocker.SetActive(false);
                 infoText.text = TAP_ON_THE_PEASHOOTER;
                 arrow.SetActive(true);
                 break;
+
             case TutorialStep.DonLetZombie:
                 infoTextParent.gameObject.SetActive(true);
                 infoText.text = DONT_LET_ZOMBIE;
                 Invoke(nameof(EnableZombieSpanwer), 2);
                 break;
         }
+    }
+
+    private IEnumerator NicelyDoneCoroutine()
+    {
+        infoText.text = NICELY_DONE;
+        arrow.SetActive(false);
+        yield return new WaitForSeconds(2f);
+        UpdateTutorialStep(TutorialStep.EnableSunSpawner);
+    }
+
+    private IEnumerator CollectedEnoughCoroutine()
+    {
+        interactivityBlocker.SetActive(true);
+        infoText.text = EXCELLENT_YOU_COLLECTED_ENOUGH;
+        yield return new WaitForSeconds(2f);
+        UpdateTutorialStep(TutorialStep.PlantAgain);
     }
 
     private void EnableZombieSpanwer()
