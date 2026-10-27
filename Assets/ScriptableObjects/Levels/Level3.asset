@@ -12,46 +12,150 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43fb636fb61aba43a2b5ad880a747a9, type: 3}
   m_Name: Level3
   m_EditorClassIdentifier: 
-  waves:
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 1
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    - {fileID: 2902125557243766653, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
-    zombieCount: 2
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 2902125557243766653, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 3
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    - {fileID: 2902125557243766653, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
-    - {fileID: 2902125557243766653, guid: 9eff867337f849e469d669241e7a48de, type: 3}
-    zombieCount: 3
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 2902125557243766653, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
-    - {fileID: 2902125557243766653, guid: 9eff867337f849e469d669241e7a48de, type: 3}
-    zombieCount: 4
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 2902125557243766653, guid: 9eff867337f849e469d669241e7a48de, type: 3}
-    zombieCount: 5
-    delay: 0
-    remainingZombies: 3
+  levelName: Last Stand
+  briefing: Every bot, every lane, one house. The swarm is throwing everything it has. Break it here.
   lanesToUse: 0100000001000000010000000100000001000000
-  unlockedSeedSO: {fileID: 11400000, guid: 098a10c04e2f12347ae1a95615b54003, type: 2}
+  startingSun: 250
+  sunSpawnInterval: 9
+  zombieHealthStart: 1
+  zombieHealthEnd: 1.6
+  zombieSpeedStart: 1
+  zombieSpeedEnd: 1.12
+  zombieDamageStart: 1
+  zombieDamageEnd: 1.15
+  maxWaveWindow: 22
+  waves:
+  - label: Opening Salvo
+    delayBeforeWave: 14
+    spawnInterval: 2.4
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 4
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 3
+  - label: Grinder
+    delayBeforeWave: 8
+    spawnInterval: 2.2
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 5
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+  - label: Heavy Metal
+    delayBeforeWave: 8
+    spawnInterval: 2
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  - label: Crush Depth
+    delayBeforeWave: 8
+    spawnInterval: 1.8
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  - label: All In
+    delayBeforeWave: 8
+    spawnInterval: 1.6
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 4
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  - label: Last Reserves
+    delayBeforeWave: 8
+    spawnInterval: 1.5
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 5
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  - label: The Swarm
+    delayBeforeWave: 11
+    spawnInterval: 1.1
+    hugeWave: 1
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 7
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 5
+      lane: -1
+      spacing: -1
+      startDelay: 1
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 3
+  unlockedSeeds: []
+  unlockedSeedSO: {fileID: 0}
+  isTutorial: 0
+  isFinalLevel: 1

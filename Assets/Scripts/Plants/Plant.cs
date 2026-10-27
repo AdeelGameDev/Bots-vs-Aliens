@@ -15,10 +15,19 @@ public abstract class Plant : MonoBehaviour, IPlantable
         healthSystemComponent = GetComponent<HealthSystemComponent>();
     }
 
-    public virtual void DropSun()
+    /// <summary>
+    /// Salvage photons when the player shovels a bot. Deliberately a partial
+    /// refund: a full refund would let a damaged wall be replanted for free.
+    /// </summary>
+    public virtual void DropSun(int sunCount = 1)
     {
-        Instantiate(dropSun, transform.position + new Vector3(0.25f, 0, 0), Quaternion.identity);
-        Instantiate(dropSun, transform.position + new Vector3(-0.25f, 0, 0), Quaternion.identity);
+        if (dropSun == null) return;
+
+        for (int i = 0; i < sunCount; i++)
+        {
+            float offset = sunCount <= 1 ? 0f : Mathf.Lerp(-0.25f, 0.25f, i / (float)(sunCount - 1));
+            Instantiate(dropSun, transform.position + new Vector3(offset, 0, 0), Quaternion.identity);
+        }
     }
 
 

@@ -12,26 +12,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43fb636fb61aba43a2b5ad880a747a9, type: 3}
   m_Name: TutorialLevel
   m_EditorClassIdentifier: 
-  waves:
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 0
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 0
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 5
-    remainingZombies: 1
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 2
-    delay: 0
-    remainingZombies: 0
+  levelName: Training Ground
+  briefing: Learn the controls. Deploy PulseBots, gather photons and stop the first alien before it reaches the house.
   lanesToUse: 0000000000000000010000000000000000000000
-  unlockedSeedSO: {fileID: 11400000, guid: 43ca2595e529cde42a8c3cda3bcefdac, type: 2}
+  startingSun: 100
+  sunSpawnInterval: 5
+  zombieHealthStart: 1
+  zombieHealthEnd: 1
+  zombieSpeedStart: 1
+  zombieSpeedEnd: 1
+  zombieDamageStart: 1
+  zombieDamageEnd: 1
+  maxWaveWindow: 30
+  waves:
+  - label: First Contact
+    delayBeforeWave: 1
+    spawnInterval: 2
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 1
+      lane: 2
+      spacing: -1
+      startDelay: 0
+  - label: One More
+    delayBeforeWave: 8
+    spawnInterval: 2.5
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 2
+      lane: 2
+      spacing: -1
+      startDelay: 0
+  unlockedSeeds:
+  - {fileID: 11400000, guid: 43ca2595e529cde42a8c3cda3bcefdac, type: 2}
+  unlockedSeedSO: {fileID: 0}
+  isTutorial: 1
+  isFinalLevel: 0

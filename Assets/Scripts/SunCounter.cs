@@ -59,6 +59,16 @@ public class SunCounter : MonoBehaviour
 
     public static event Action OnSeedNotPurchasable;
 
+    public void ConfigureStartingSun(int amount)
+    {
+        startingSunCount = Mathf.Max(0, amount);
+    }
+
+    public int GetSunCount()
+    {
+        return sunCount;
+    }
+
     private void Sun_OnSunCollected(int sunValue)
     {
         sunCount += sunValue;

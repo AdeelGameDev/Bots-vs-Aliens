@@ -44,7 +44,7 @@ public class TutorialUI : MonoBehaviour
     {
         interactivityBlocker.SetActive(false);
 
-        if (PlayerPrefs.GetInt("Level") != 0)
+        if (!IsTutorialLevel())
         {
             OnSunSpawnerActivate?.Invoke();
             Destroy(gameObject);
@@ -59,6 +59,18 @@ public class TutorialUI : MonoBehaviour
         SunCounter.OnSunCountUpdated += SunCounter_OnSunCountUpdated;
 
         StartCoroutine(InitialDeactivate());
+    }
+
+    /// <summary>The level asset decides whether this is the tutorial, not a magic index.</summary>
+    private static bool IsTutorialLevel()
+    {
+        LevelManager levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager != null && levelManager.CurrentLevel != null)
+        {
+            return levelManager.CurrentLevel.isTutorial;
+        }
+
+        return PlayerPrefs.GetInt(LevelManager.LEVEL_PREF_KEY, 0) == 0;
     }
 
     private IEnumerator InitialDeactivate()
@@ -193,7 +205,6 @@ public class TutorialUI : MonoBehaviour
         infoTextParent.gameObject.SetActive(false);
         OnZombieSpawnerActivate?.Invoke();
     }
-
     private void OnDestroy()
     {
         SeedSlotUI.OnSeedSelected -= HandleSeedSelected;

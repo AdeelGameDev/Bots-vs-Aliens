@@ -17,6 +17,9 @@ public class RemoveButtonUI : MonoBehaviour
 
     private void Start()
     {
+        // Static tool state must not leak across a retry or the next level.
+        removeToolSelected = false;
+
         if (PlayerPrefs.GetInt("Level") == 0)
         {
             gameObject.SetActive(false);
@@ -50,4 +53,8 @@ public class RemoveButtonUI : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GrassPatch.OnPlantRemoved -= GrassPatch_OnPlantRemoved;
+    }
 }

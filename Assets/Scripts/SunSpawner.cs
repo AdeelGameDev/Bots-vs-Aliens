@@ -12,6 +12,25 @@ public class SunSpawner : MonoBehaviour
     private float timer;
     [SerializeField] private bool isSpawningActive = false;
 
+    public void SetSpawnInterval(float seconds)
+    {
+        if (seconds > 0f) spawnInterval = seconds;
+    }
+
+    /// <summary>Turns the sky-photon rain on. Also used to resume after a tutorial pause.</summary>
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+        isSpawningActive = true;
+        timer = startDelay;
+    }
+
+    public void Deactivate()
+    {
+        isSpawningActive = false;
+        gameObject.SetActive(false);
+    }
+
     private void Start()
     {
         timer = startDelay;
@@ -29,16 +48,12 @@ public class SunSpawner : MonoBehaviour
 
     private void TutorialUI_OnSunSpawnerDeactivate()
     {
-
-        isSpawningActive = false;
-        gameObject.SetActive(false);
+        Deactivate();
     }
 
     private void TutorialUI_OnSunSpawnerActivate()
     {
-        gameObject.SetActive(true);
-        isSpawningActive = true;
-        timer = startDelay; // Reset the timer to the start delay when activated
+        Activate();
     }
 
     private void OnDestroy()
@@ -55,8 +70,19 @@ public class SunSpawner : MonoBehaviour
         if (timer <= 0)
         {
             SpawnSun();
-            timer = spawnInterval;
+            timer = CurrentSpawnInterval();
         }
+    }
+
+    private float CurrentSpawnInterval()
+    {
+        float multiplier = 1f;
+        if (DifficultyDirector.Instance != null)
+        {
+            multiplier = DifficultyDirector.Instance.SunIntervalMultiplier;
+        }
+
+        return Mathf.Max(1.5f, spawnInterval * multiplier);
     }
 
     private void SpawnSun()

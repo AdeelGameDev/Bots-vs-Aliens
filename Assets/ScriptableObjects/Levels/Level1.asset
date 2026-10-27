@@ -12,31 +12,111 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43fb636fb61aba43a2b5ad880a747a9, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
+  levelName: Frontier Line
+  briefing: The swarm has found the house. Plant PulseBots along the lawn and use SolarCores to keep the photons flowing.
+  lanesToUse: 0100000001000000010000000100000001000000
+  startingSun: 200
+  sunSpawnInterval: 11
+  zombieHealthStart: 1
+  zombieHealthEnd: 1.3
+  zombieSpeedStart: 1
+  zombieSpeedEnd: 1.06
+  zombieDamageStart: 1
+  zombieDamageEnd: 1.05
+  maxWaveWindow: 26
   waves:
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 0
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 2
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 2
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 3
-    delay: 0
-    remainingZombies: 3
-  lanesToUse: 0000000001000000010000000100000000000000
-  unlockedSeedSO: {fileID: 11400000, guid: b99ab204edb8ac246b214549fcd0bcbe, type: 2}
+  - label: Probe
+    delayBeforeWave: 14
+    spawnInterval: 2.6
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 0
+  - label: Pressure
+    delayBeforeWave: 8
+    spawnInterval: 2.3
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 0
+  - label: Hardened
+    delayBeforeWave: 8
+    spawnInterval: 2.1
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+  - label: Flank
+    delayBeforeWave: 8
+    spawnInterval: 1.9
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 2
+      lane: 0
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 2
+      lane: 4
+      spacing: -1
+      startDelay: 1
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 3
+  - label: Push
+    delayBeforeWave: 9
+    spawnInterval: 1.8
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 4
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+  - label: Last Push
+    delayBeforeWave: 10
+    spawnInterval: 1.5
+    hugeWave: 1
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 5
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  unlockedSeeds:
+  - {fileID: 11400000, guid: b99ab204edb8ac246b214549fcd0bcbe, type: 2}
+  unlockedSeedSO: {fileID: 0}
+  isTutorial: 0
+  isFinalLevel: 0

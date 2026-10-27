@@ -12,34 +12,132 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43fb636fb61aba43a2b5ad880a747a9, type: 3}
   m_Name: Level2
   m_EditorClassIdentifier: 
-  waves:
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 1
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 1
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    - {fileID: 2902125557243766653, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
-    zombieCount: 2
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 2902125557243766653, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    zombieCount: 3
-    delay: 0
-    remainingZombies: 3
-  - zombiePrefabs:
-    - {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
-    - {fileID: 2902125557243766653, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
-    zombieCount: 4
-    delay: 0
-    remainingZombies: 3
+  levelName: Scrap Belt
+  briefing: Armoured aliens are pushing the middle. SpikeMines buy time, CrushPods flatten a lane, ShieldCores hold the door.
   lanesToUse: 0100000001000000010000000100000001000000
-  unlockedSeedSO: {fileID: 11400000, guid: 1ab7cb19e9eafdb43b9f05b8c4495a35, type: 2}
+  startingSun: 225
+  sunSpawnInterval: 10
+  zombieHealthStart: 1
+  zombieHealthEnd: 1.45
+  zombieSpeedStart: 1
+  zombieSpeedEnd: 1.08
+  zombieDamageStart: 1
+  zombieDamageEnd: 1.1
+  maxWaveWindow: 24
+  waves:
+  - label: Probing Armour
+    delayBeforeWave: 14
+    spawnInterval: 2.6
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 2
+  - label: Reinforced
+    delayBeforeWave: 8
+    spawnInterval: 2.3
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 4
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+  - label: Double Time
+    delayBeforeWave: 8
+    spawnInterval: 2.1
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  - label: Breaker
+    delayBeforeWave: 8
+    spawnInterval: 1.9
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  - label: Iron Wall
+    delayBeforeWave: 9
+    spawnInterval: 1.7
+    hugeWave: 0
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 4
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 3
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 1
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  - label: Final Wave
+    delayBeforeWave: 10
+    spawnInterval: 1.4
+    hugeWave: 1
+    spawns:
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 5920da0eb6a0b7a489973f1871f27c77, type: 3}
+      count: 6
+      lane: -1
+      spacing: -1
+      startDelay: 0
+    - zombiePrefab: {fileID: 1439360974597154040, guid: bae5b94ecec6a8c4f8dcd3b6a0aa9fcb, type: 3}
+      count: 4
+      lane: -1
+      spacing: -1
+      startDelay: 2
+    - zombiePrefab: {fileID: 1439360974597154040, guid: 9eff867337f849e469d669241e7a48de, type: 3}
+      count: 2
+      lane: -1
+      spacing: -1
+      startDelay: 4
+  unlockedSeeds:
+  - {fileID: 11400000, guid: 1ab7cb19e9eafdb43b9f05b8c4495a35, type: 2}
+  - {fileID: 11400000, guid: 098a10c04e2f12347ae1a95615b54003, type: 2}
+  unlockedSeedSO: {fileID: 0}
+  isTutorial: 0
+  isFinalLevel: 0

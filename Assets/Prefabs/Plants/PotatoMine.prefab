@@ -195,8 +195,8 @@ MonoBehaviour:
   zombieLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  armingTime: 8
-  explosionRadius: 1
+  armingTime: 6
+  explosionRadius: 2
   explosionDamage: 1000
   rayCastPoint: {fileID: 5875986775021383543}
   animator: {fileID: 1820030523170597325}

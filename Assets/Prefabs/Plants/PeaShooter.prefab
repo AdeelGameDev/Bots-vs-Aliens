@@ -125,7 +125,7 @@ MonoBehaviour:
     m_Bits: 512
   peaPrefab: {fileID: 8452003760001845861, guid: 70580e99827c86c4f83d22e73c087c5e, type: 3}
   spawnPoint: {fileID: 4895456630104944933}
-  fireInterval: 2
+  fireInterval: 1.6
   fixedDistanceX: -8
   maxRaycastDistance: 17
   rayColor: {r: 1, g: 0, b: 0, a: 1}

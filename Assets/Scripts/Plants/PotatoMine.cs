@@ -9,7 +9,7 @@ public class PotatoMine : Plant
     public int explosionDamage = 100;
     [SerializeField] private Transform rayCastPoint;
     [SerializeField] private Animator animator;
-    [SerializeField] private ParticleSystem explosionVFX;
+    //[SerializeField] private ParticleSystem explosionVFX;
 
     private bool isArmed = false;
     private float armStartTime;
@@ -24,10 +24,7 @@ public class PotatoMine : Plant
     {
         if (!isArmed && Time.time >= armStartTime + armingTime)
         {
-            Debug.Log("Potato Mine armed!");
-
-            AudioManager.Instance.Play("DirtRise");
-            animator.SetTrigger("ArmedAndReady"); // Combine "Armed" and "Ready" triggers
+            Arm();
         }
 
         if (isArmed)
@@ -47,12 +44,32 @@ public class PotatoMine : Plant
 
     private bool isExploded = false;
 
-    // Method to be called by animation event
+    /// <summary>
+    /// Arms the mine. Called by the timer below, and again by the animation event
+    /// if the clip has one. The timer path means the mine always works even if the
+    /// clip never fires the event.
+    /// </summary>
+    public void Arm()
+    {
+        if (isArmed) return;
+
+        isArmed = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("ArmedAndReady");
+        }
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.Play("DirtRise");
+        }
+    }
+
+    // Kept for the animation clip's event, if it has one.
     public void OnArmedAnimationFinished()
     {
-        // This method is called when the "ArmedAndReady" animation finishes
-        isArmed = true;
-        Debug.Log("Potato Mine fully armed!");
+        Arm();
     }
 
 
@@ -60,7 +77,7 @@ public class PotatoMine : Plant
     {
         isExploded = true;
 
-        Instantiate(explosionVFX, transform.position, Quaternion.identity);
+      //  Instantiate(explosionVFX, transform.position, Quaternion.identity);
         AudioManager.Instance.Play("Explosion");
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);

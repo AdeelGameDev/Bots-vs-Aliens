@@ -16,7 +16,7 @@ public class Pea : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Zombie zombie))
         {
-            zombie.GetComponent<HealthSystemComponent>().GetHealthSystem().Damage(10);
+            zombie.GetComponent<HealthSystemComponent>().GetHealthSystem().Damage(15);
             AudioManager.Instance.Play(splatSound[Random.Range(0, splatSound.Length)]);
             Instantiate(peahShootVFX, transform.position, Quaternion.identity);
             Destroy(gameObject);

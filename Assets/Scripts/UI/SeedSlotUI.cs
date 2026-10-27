@@ -55,6 +55,11 @@ public class SeedSlotUI : MonoBehaviour, IPointerDownHandler
         selectedImage.SetActive(false);
         cooldownImage.gameObject.SetActive(false); // Disable image initially
 
+        // Slots are created at runtime, so the initial broadcast is missed.
+        // Pull the current count once to show the right state immediately.
+        SunCounter sunCounter = FindObjectOfType<SunCounter>();
+        if (sunCounter != null) SunCounter_OnSunCountUpdated(sunCounter.GetSunCount());
+
         SunCounter.OnSeedSelected += HighlightSelectedSeed;
         GrassPatch.OnPlantPlaced += GrassPatch_OnPlantPlaced; ;
     }

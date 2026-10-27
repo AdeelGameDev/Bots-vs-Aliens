@@ -7,6 +7,9 @@ public class UnlockedSeedsData
     public List<string> unlockedSeedIDs = new List<string>();
 }
 
+/// <summary>
+/// PlayerPrefs-backed collection of bots the player has permanently unlocked.
+/// </summary>
 public class UnlockedSeedsManager : MonoBehaviour
 {
     private const string UNLOCKED_SEED_KEY = "UnlockedSeeds";
@@ -24,7 +27,6 @@ public class UnlockedSeedsManager : MonoBehaviour
     {
         LoadUnlockedSeeds();
 
-        // Debug mode: unlock everything
         if (unlockAllSeedsForTesting)
         {
             UnlockAllSeeds();
@@ -33,23 +35,77 @@ public class UnlockedSeedsManager : MonoBehaviour
 
     public void UnlockNewSeed(SeedSO seedSO)
     {
-        if (!unlockedSeedsData.unlockedSeedIDs.Contains(seedSO.seedID))
+        if (seedSO == null) return;
+
+        string id = Normalise(seedSO.seedID);
+        if (string.IsNullOrEmpty(id)) return;
+
+        if (!Contains(id))
         {
-            unlockedSeedsData.unlockedSeedIDs.Add(seedSO.seedID);
+            unlockedSeedsData.unlockedSeedIDs.Add(id);
             SaveUnlockedSeeds();
-            Debug.Log($"Unlocked new seed: {seedSO.seedPlantName}");
+            Debug.Log("Unlocked new seed: " + seedSO.seedPlantName);
         }
+    }
+
+    public void UnlockSeeds(IEnumerable<SeedSO> seeds)
+    {
+        if (seeds == null) return;
+
+        bool changed = false;
+        foreach (SeedSO seed in seeds)
+        {
+            if (seed == null) continue;
+
+            string id = Normalise(seed.seedID);
+            if (string.IsNullOrEmpty(id) || Contains(id)) continue;
+
+            unlockedSeedsData.unlockedSeedIDs.Add(id);
+            changed = true;
+        }
+
+        if (changed) SaveUnlockedSeeds();
+    }
+
+    public bool HasSeed(SeedSO seedSO)
+    {
+        return seedSO != null && Contains(Normalise(seedSO.seedID));
+    }
+
+    public List<SeedSO> GetAllSeeds()
+    {
+        return allSeeds != null ? new List<SeedSO>(allSeeds) : new List<SeedSO>();
+    }
+
+    private bool Contains(string normalisedID)
+    {
+        foreach (string id in unlockedSeedsData.unlockedSeedIDs)
+        {
+            if (Normalise(id) == normalisedID) return true;
+        }
+
+        return false;
+    }
+
+    private static string Normalise(string id)
+    {
+        return id == null ? string.Empty : id.Trim();
     }
 
     private void UnlockAllSeeds()
     {
         unlockedSeedsData.unlockedSeedIDs.Clear();
 
-        foreach (var seed in allSeeds)
+        if (allSeeds != null)
         {
-            if (!unlockedSeedsData.unlockedSeedIDs.Contains(seed.seedID))
+            foreach (SeedSO seed in allSeeds)
             {
-                unlockedSeedsData.unlockedSeedIDs.Add(seed.seedID);
+                if (seed == null) continue;
+                string id = Normalise(seed.seedID);
+                if (!string.IsNullOrEmpty(id) && !unlockedSeedsData.unlockedSeedIDs.Contains(id))
+                {
+                    unlockedSeedsData.unlockedSeedIDs.Add(id);
+                }
             }
         }
 
@@ -62,47 +118,68 @@ public class UnlockedSeedsManager : MonoBehaviour
         string json = JsonUtility.ToJson(unlockedSeedsData);
         PlayerPrefs.SetString(UNLOCKED_SEED_KEY, json);
         PlayerPrefs.Save();
-        Debug.Log($"Unlocked seeds saved: {json}");
     }
 
     private void LoadUnlockedSeeds()
     {
+        unlockedSeedsData = new UnlockedSeedsData();
+
         if (PlayerPrefs.HasKey(UNLOCKED_SEED_KEY))
         {
             string json = PlayerPrefs.GetString(UNLOCKED_SEED_KEY);
-            unlockedSeedsData = JsonUtility.FromJson<UnlockedSeedsData>(json);
-            Debug.Log($"Loaded unlocked seeds: {json}");
+            UnlockedSeedsData loaded = JsonUtility.FromJson<UnlockedSeedsData>(json);
+            if (loaded != null && loaded.unlockedSeedIDs != null)
+            {
+                unlockedSeedsData = loaded;
+            }
         }
-        else
+
+        // Tidy up ids saved with stray whitespace and guarantee the starter bot.
+        for (int i = 0; i < unlockedSeedsData.unlockedSeedIDs.Count; i++)
         {
-            unlockedSeedsData.unlockedSeedIDs.Add(startingSeedSO.seedID);
-            SaveUnlockedSeeds();
+            unlockedSeedsData.unlockedSeedIDs[i] = Normalise(unlockedSeedsData.unlockedSeedIDs[i]);
         }
+
+        if (startingSeedSO != null)
+        {
+            string starterID = Normalise(startingSeedSO.seedID);
+            if (!string.IsNullOrEmpty(starterID) && !Contains(starterID))
+            {
+                unlockedSeedsData.unlockedSeedIDs.Add(starterID);
+            }
+        }
+
+        SaveUnlockedSeeds();
     }
 
     public List<SeedSO> GetUnlockedSeeds()
     {
         List<SeedSO> unlocked = new List<SeedSO>();
+        if (allSeeds == null) return unlocked;
 
         foreach (string id in unlockedSeedsData.unlockedSeedIDs)
         {
-            SeedSO seed = allSeeds.Find(s => s.seedID == id);
+            string normalised = Normalise(id);
+            SeedSO seed = allSeeds.Find(s => s != null && Normalise(s.seedID) == normalised);
 
             if (seed != null)
-                unlocked.Add(seed);
+            {
+                if (!unlocked.Contains(seed)) unlocked.Add(seed);
+            }
             else
-                Debug.LogError($"No SeedSO found for id: {id}");
+            {
+                Debug.LogWarning("No SeedSO found for id: " + id);
+            }
         }
 
         return unlocked;
     }
 
-    // Optional helper for testing reset
     public void ResetProgress()
     {
         PlayerPrefs.DeleteKey(UNLOCKED_SEED_KEY);
-        unlockedSeedsData = new UnlockedSeedsData();
+        PlayerPrefs.Save();
         LoadUnlockedSeeds();
-        Debug.Log("Progress reset");
+        Debug.Log("Seed progress reset");
     }
 }

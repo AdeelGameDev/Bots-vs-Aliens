@@ -20,17 +20,52 @@ public class Zombie : MonoBehaviour
     [SerializeField] private LayerMask zombieLayerMask;
     [SerializeField] private GameObject attachedItem;
 
+    private float baseDamage;
+    private float speedMultiplier = 1f;
+    private float damageMultiplier = 1f;
+    private bool healthMultiplierApplied;
+    private bool hasDroppedItem;
+
+    /// <summary>Raised the instant the zombie dies. Use this for wave tracking.</summary>
+    public event Action<Zombie> OnKilled;
+
+    /// <summary>Raised once the corpse has been cleaned up (kept for older code).</summary>
     public event Action OnDeath;
 
     private void Awake()
     {
         healthSystemComponent = GetComponent<HealthSystemComponent>();
+        baseDamage = damage;
+    }
+
+    /// <summary>
+    /// Applies the level's difficulty ramp to this alien. Called by the spawner
+    /// immediately after instantiation, before Start().
+    /// </summary>
+    public void ApplyDifficulty(float healthScale, float speedScale, float damageScale)
+    {
+        if (healthSystemComponent == null) healthSystemComponent = GetComponent<HealthSystemComponent>();
+
+        if (!healthMultiplierApplied && healthSystemComponent != null)
+        {
+            healthMultiplierApplied = true;
+
+            if (healthScale > 0f && !Mathf.Approximately(healthScale, 1f))
+            {
+                CodeMonkey.HealthSystemCM.HealthSystem health = healthSystemComponent.GetHealthSystem();
+                if (health != null) health.SetHealthMax(health.GetHealthMax() * healthScale, true);
+            }
+        }
+
+        speedMultiplier = Mathf.Max(0.05f, speedScale);
+        damageMultiplier = Mathf.Max(0.05f, damageScale);
     }
 
     private void Start()
     {
         // Assign a random speed within the specified range
-        speed = UnityEngine.Random.Range(minSpeed, maxSpeed);
+        speed = UnityEngine.Random.Range(minSpeed, maxSpeed) * speedMultiplier;
+        damage = baseDamage * damageMultiplier;
 
         // Randomize the animation start time
         RandomizeAnimationStart();
@@ -50,8 +85,12 @@ public class Zombie : MonoBehaviour
 
     private void Zombie_OnHealthChanged(object sender, EventArgs e)
     {
-        if (healthSystemComponent.GetHealthSystem().GetHealth() == 100 && attachedItem != null)
+        if (hasDroppedItem || attachedItem == null) return;
+
+        CodeMonkey.HealthSystemCM.HealthSystem health = healthSystemComponent.GetHealthSystem();
+        if (health.GetHealthNormalized() <= 0.66f)
         {
+            hasDroppedItem = true;
             attachedItem.transform.SetParent(null);
             Rigidbody rb = attachedItem.AddComponent<Rigidbody>();
 
@@ -62,6 +101,7 @@ public class Zombie : MonoBehaviour
 
     private void Zombie_OnDead(object sender, EventArgs e)
     {
+        OnKilled?.Invoke(this);
         animator.SetTrigger("OnDeath");
         GetComponent<BoxCollider>().enabled = false;
         isMoving = false; // Stop moving when dead
@@ -79,6 +119,15 @@ public class Zombie : MonoBehaviour
     {
         if (!healthSystemComponent.GetHealthSystem().IsDead())
         {
+            // The house line is defined by the GameOverArea object in the scene.
+            // Checking it here is reliable even though zombies have no Rigidbody.
+            if (transform.position.x <= GameOverArea.HouseLineX)
+            {
+                isMoving = false;
+                if (GameManager.Instance != null) GameManager.Instance.NotifyDefeat();
+                return;
+            }
+
             if (isMoving)
             {
                 transform.Translate(Vector3.forward * speed * Time.deltaTime);

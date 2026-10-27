@@ -159,9 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68fafe54e11c7c4ba0646d8540f3551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 0.2
-  maxSpeed: 0.36
-  damage: 20
+  minSpeed: 0.3
+  maxSpeed: 0.5
+  damage: 10
   attackDelay: 1
   rayCastDistance: 1.25
   animator: {fileID: 1774970774136915453}
