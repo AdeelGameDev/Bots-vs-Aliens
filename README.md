@@ -28,6 +28,7 @@ Bots vs Aliens is a fan-inspired 3D take on the lane-defense formula. Deploy bot
 - Wave-based alien spawning with per-level ramps and a bounded adaptive difficulty director ([balance notes](docs/balance.md))
 - Tutorial plus three playable levels
 - Pause menu, music, sound effects, and a WebGL release
+- Pooled, ducked, headroom-aware audio mix ([audio notes](docs/audio.md))
 
 ### Bots
 
@@ -86,6 +87,7 @@ Assets/
   ThirdParty/        TextMesh Pro, CodeMonkey Health System
   Plugins/           DOTween
 docs/balance.md      Difficulty curve, tuning levers and playtest checklist
+docs/audio.md        Mix architecture, per-sound levels and listening checklist
 docs/screenshots/    README images
 ```
 
